@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="style.css">
+  <title>Mom's Kitchen</title>
+</head>
+<body>
+
+  <h1>Welcome to Dadnak's Kitchen</h1>
+    <button onclick="openMenu()">View Full Menu</button>
+
+<script>
+
+let stock = {
+  "Chicken Cutlet": 5,
+  "Spring Rolls": 5,
+  "Samosa": 5
+};
+
+function addToCart(itemName, pricePerDozen) {
+
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  let existing = cart.find(item => item.name === itemName);
+
+  if (existing) {
+    existing.quantity += 0.5;
+    existing.price = existing.quantity * pricePerDozen;
+  } else {
+    cart.push({
+      name: itemName,
+      quantity: 0.5,
+      price: pricePerDozen * 0.5
+    });
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  showPopup(itemName + " added!");
+}
+</script>
+
+ <!-- Menu Popup -->
+<div id="menuPopup" style="
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.9);
+  overflow:auto;
+  text-align:center;
+" onclick="closeMenu()">
+
+  <!-- Close Button -->
+  <span onclick="closeMenu()" style="
+    position:fixed;
+    top:20px;
+    right:30px;
+    color:white;
+    font-size:35px;
+    cursor:pointer;
+  ">&times;</span>
+
+  <!-- Image Container -->
+  <div onclick="event.stopPropagation()" style="
+    margin-top:80px;
+    margin-bottom:40px;
+  ">
+    <img src="menu.jpeg" style="
+      width:90%;
+      max-width:600px;
+      border-radius:10px;
+    ">
+  </div>
+
+</div>
+
+<script>
+function openMenu() {
+  document.getElementById("menuPopup").style.display = "block";
+}
+
+function closeMenu() {
+  document.getElementById("menuPopup").style.display = "none";
+}
+
+function showPopup(message) {
+  let popup = document.getElementById("popup");
+
+  popup.innerText = message;
+  popup.style.display = "block";
+
+  setTimeout(function() {
+    popup.style.display = "none";
+  }, 2000);
+}
+
+</script>
+  <h2>Today's Menu</h2>
+  <h5>NOTE: Prices are given as per a dozen</h5>
+
+  <!-- Item 1 -->
+  <div>
+    <h3>Chicken Cutlet 180/-</h3>
+    <button onclick="addToCart('Chicken Cutlet', 180)">Add to cart</button>
+  </div>
+
+  <hr>
+
+  <!-- Item 2 -->
+  <div>
+    <h3>Spring Rolls 200/-</h3>
+    <button onclick="addToCart('Spring Rolls', 200)">Add to cart</button>
+  </div>
+
+  <hr>
+
+  <!-- Item 3 -->
+  <div>
+    <h3>Samosa 150/-</h3>
+    <button onclick="addToCart('Samosa', 150)">Add to cart</button>
+  </div>
+  <hr>
+
+<div id="popup" style="
+display:none;
+position:fixed;
+top:20px;
+left:50%;
+transform:translateX(-50%);
+background:#f5c518;
+color:#000;
+padding:12px 20px;
+border-radius:8px;
+font-weight:bold;
+z-index:1000;
+">
+Item added!
+</div>
+
+ <button onclick="goToCart()">Go to Cart 🛒</button>
+
+<script>
+function goToCart() {
+  window.location.href = "cart.html";
+}
+</script>
+
+</body>
+</html>

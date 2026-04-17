@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="style.css">
+  <title>Your Cart</title>
+</head>
+<body>
+
+  <h1>Your Cart 🛒</h1>
+
+  <div id="cartItems"></div>
+
+<h3 id="totalPrice"></h3>
+   
+  <button onclick="clearCart()">Clear Cart</button>
+  <button onclick="sendToWhatsApp()">Order on WhatsApp</button>
+  <button onclick="window.location.href='index.html'">Go Back to Menu</button>
+
+<script>
+function clearCart() {
+  localStorage.removeItem("cart");
+  alert("Cart cleared!");
+  location.reload();
+}
+</script>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+let container = document.getElementById("cartItems");
+let totalDisplay = document.getElementById("totalPrice");
+
+function displayCart() {
+
+  container.innerHTML = "";
+  let total = 0;
+
+  cart.forEach((item, index) => {
+
+    total += item.price;
+
+    let div = document.createElement("div");
+
+    div.innerHTML = `
+      ${item.name} 
+      
+      <button onclick="decreaseQty(${index})">➖</button>
+      ${item.quantity} dozen
+      <button onclick="increaseQty(${index})">➕</button>
+
+      (₹${item.price})
+
+      <button onclick="removeItem(${index})">❌</button>
+    `;
+
+    container.appendChild(div);
+  });
+
+  totalDisplay.innerText = "Total: ₹" + total;
+}
+</script>
+
+<script>
+  function sendToWhatsApp() 
+  
+  {
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    if (cart.length === 0) 
+    {
+      alert("Cart is empty!");
+      return;
+    }
+
+  let message = "Hi, I want to order:\n";
+
+  cart.forEach(function(item) {
+    message += item.name + " - " + item.quantity + " dozen\n";
+  });
+
+  let phoneNumber = "918605699566"; 
+
+  let url = "https://wa.me/" + phoneNumber + "?text=" + encodeURIComponent(message);
+
+  window.open(url, "_blank");
+  }
+  displayCart();
+</script>
+<script>
+function increaseQty(index) {
+
+  let pricePerDozen = cart[index].price / cart[index].quantity;
+
+  cart[index].quantity += 0.5;
+  cart[index].price = cart[index].quantity * pricePerDozen;
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  displayCart();
+}
+
+function decreaseQty(index) {
+
+  if (cart[index].quantity <= 0.5) {
+    alert("Minimum is 0.5 dozen");
+    return;
+  }
+
+  let pricePerDozen = cart[index].price / cart[index].quantity;
+
+  cart[index].quantity -= 0.5;
+  cart[index].price = cart[index].quantity * pricePerDozen;
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  displayCart();
+}
+
+function removeItem(index) {
+  cart.splice(index, 1);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  displayCart();
+}
+</script>
+</body>
+</html>

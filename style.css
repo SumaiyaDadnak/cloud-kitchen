@@ -1,0 +1,150 @@
+/* Base */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+  color: #fff;
+
+  background: url("/bg.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+/* Headings */
+h1 {
+  color: #f5c518;
+  margin-bottom: 20px;
+}
+
+h2 {
+  color: #f5c518;
+  margin-top: 30px;
+}
+
+h5 {
+  color: #aaa;
+  margin-bottom: 20px;
+}
+
+/* Center container */
+body > * {
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Buttons */
+button {
+  background: #f5c518;
+  color: #000;
+  border: none;
+  padding: 6px 14px;
+  margin: 10px auto;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  display: block;
+}
+
+button:hover {
+  background: #ffd700;
+}
+
+/* Menu items (clean centered cards) */
+div {
+  background: #1a1a1a;
+  padding: 15px;
+  margin: 15px auto;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.08);
+}
+
+/* Item title */
+h3 {
+  margin-bottom: 10px;
+}
+
+/* Remove long lines look */
+hr {
+  display: none;
+}
+
+/* Popup image */
+#menuPopup img {
+  border: 2px solid #f5c518;
+}
+
+/* Cart layout */
+#cartItems div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* Total */
+#totalPrice {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #f5c518;
+}
+
+/* Cart container */
+#cartItems {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Each cart item */
+#cartItems div {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 12px;
+  margin: 12px 0;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+/* Cart buttons (+ - x) */
+#cartItems button {
+  background: #f5c518;
+  color: #000;
+  border: none;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#cartItems button:hover {
+  background: #ffd700;
+}
+
+#popup {
+  box-shadow: 0 0 10px rgba(255,215,0,0.6);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity:0; transform:translate(-50%, -10px); }
+  to { opacity:1; transform:translate(-50%, 0); }
+}
+
+/* Action buttons (bottom) */
+button {
+  display: inline-block;
+  margin: 10px 5px;
+}
+
+/* Total styling */
+#totalPrice {
+  font-size: 20px;
+  margin-top: 20px;
+  color: #f5c518;
+}
